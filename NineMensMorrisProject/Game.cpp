@@ -2,6 +2,7 @@
 
 void Game::InitVariables()
 {
+	this->currentGameState = GameState::PLACING;
 	this->window = nullptr;
 }
 
@@ -38,10 +39,10 @@ void Game::UpdatePollEvents()
 		case sf::Event::Closed:
 			this->window->close();
 			break;
-		case sf::Event::KeyPressed:
-			if (this->ev.key.code == sf::Keyboard::Escape)
+		case sf::Event::MouseButtonPressed:
+			if (this->ev.key.code == sf::Mouse::Left)
 			{
-				this->window->close();
+				// Handle left click depending on game state
 			}
 			break;
 		}
@@ -58,4 +59,9 @@ void Game::Render()
 	this->window->clear();
 
 	this->window->display();
+}
+
+void Game::ChangeGameState(GameState newGameState)
+{
+	this->currentGameState = newGameState;
 }

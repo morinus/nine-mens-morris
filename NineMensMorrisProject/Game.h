@@ -5,17 +5,27 @@
 
 /*
 	Class that acts as the game engine.
-	Wrapper class.
 */
+
+enum GameState
+{
+	PLACING,
+	MOVING,
+	REMOVING,
+	ENDGAME
+};
 
 class Game
 {
 private:
 	// Variables
+	GameState currentGameState;
+
 	// Window
 	sf::RenderWindow* window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
+
 
 	// Private functions
 	void InitVariables();
@@ -33,4 +43,5 @@ public:
 	void UpdatePollEvents();
 	void Update();
 	void Render();
+	void ChangeGameState(GameState newGameState);
 };
