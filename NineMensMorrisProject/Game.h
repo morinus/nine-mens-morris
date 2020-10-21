@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Board.h"
+#include "Text.h"
 
 /*
 	Class that acts as the game engine.
@@ -20,12 +22,14 @@ class Game
 private:
 	// Variables
 	GameState currentGameState;
+	Board* board;
+	int currentPlayerIndex;
+	int piecesPerPlayer;
 
 	// Window
 	sf::RenderWindow* window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
-
 
 	// Private functions
 	void InitVariables();

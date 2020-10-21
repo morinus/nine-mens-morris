@@ -3,12 +3,15 @@
 void Game::InitVariables()
 {
 	this->currentGameState = GameState::PLACING;
+	this->board = new Board();
+	this->currentPlayerIndex = rand() % 2;
+	this->piecesPerPlayer = 9;
 	this->window = nullptr;
 }
 
 void Game::InitWindow()
 {
-	this->videoMode.height = 600;
+	this->videoMode.height = 440;
 	this->videoMode.width = 800;
 	this->window = new sf::RenderWindow(this->videoMode, "Nine Men's Morris", sf::Style::Close);
 }
@@ -42,8 +45,11 @@ void Game::UpdatePollEvents()
 		case sf::Event::MouseButtonPressed:
 			if (this->ev.key.code == sf::Mouse::Left)
 			{
-				// Handle left click depending on game state
+				sf::Vector2i currentMousePosition = sf::Mouse::getPosition(*this->window);
+
+				std::cout << currentMousePosition.x << ' ' << currentMousePosition.y << std::endl;
 			}
+
 			break;
 		}
 	}
@@ -56,7 +62,9 @@ void Game::Update()
 
 void Game::Render()
 {
-	this->window->clear();
+	this->window->clear(sf::Color::White);
+
+	board->Render(this->window);
 
 	this->window->display();
 }
