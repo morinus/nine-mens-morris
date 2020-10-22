@@ -2,36 +2,47 @@
 
 #include <iostream>>
 #include <SFML/Graphics.hpp>
-
-#define ERROR_LOADING_TEXTURE "Error loading texture!"
+#include "ErrorMessageStrings.h"
+#include "Button.h"
 
 /*
 	Class for handling game pieces.
 */
 
-enum Ownership
+enum OwnershipType
 {
-	PlayerOne,
-	PlayerTwo
+	PLAYERONE,
+	PLAYERTWO
 };
 
-class Piece
+enum PieceState
+{
+	UNPLACED,
+	PLACED
+};
+
+class Piece : public Button
 {
 private:
 	// Variables
-	sf::Vector2f position;
-	sf::Vector2f startingPosition;
-	sf::Texture pieceTexture;
-	sf::Sprite pieceSprite;
-	Ownership pieceOwnership;
+	float moveLerpWeight = 10.0f;
+
+	sf::Vector2f targetPosition;
+	OwnershipType pieceOwnership;
+	PieceState pieceState;
 
 	void LoadTexture();
 public:
 	// Constructor
-	Piece(Ownership pieceOwnership, sf::Vector2f startingPosition);
+	Piece(OwnershipType pieceOwnership, sf::Vector2f startingPosition);
+
+	// Accessors
+	PieceState GetPieceState();
+	OwnershipType GetOwnershipType();
 
 	// Functions
 	void SetPosition(sf::Vector2f position);
-	void Render(sf::RenderWindow* window);
+	void SetPieceState(PieceState newState);
+	void Render(sf::RenderWindow* window, float deltaTime);
 };
 

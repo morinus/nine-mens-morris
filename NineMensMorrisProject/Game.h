@@ -3,7 +3,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Board.h"
-#include "Text.h"
 
 /*
 	Class that acts as the game engine.
@@ -24,7 +23,6 @@ private:
 	GameState currentGameState;
 	Board* board;
 	int currentPlayerIndex;
-	int piecesPerPlayer;
 
 	// Window
 	sf::RenderWindow* window;
@@ -34,6 +32,10 @@ private:
 	// Private functions
 	void InitVariables();
 	void InitWindow();
+	void ChangeGameState(GameState newGameState);
+	void UpdatePollEvents();
+	void ProcessCurrentGameState();
+	void ChangeTurn();
 
 public:
 	// Construtor & Destructor
@@ -44,8 +46,6 @@ public:
 	const bool GetWindowIsOpen() const;
 
 	// Functions
-	void UpdatePollEvents();
 	void Update();
-	void Render();
-	void ChangeGameState(GameState newGameState);
+	void Render(float deltaTime);
 };

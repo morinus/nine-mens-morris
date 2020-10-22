@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Point.h"
 #include "Piece.h"
+#include "ErrorMessageStrings.h"
 
 /*
 	Class that is responsible for handling the game board.
@@ -12,11 +13,6 @@
 // Board setup
 #define PIECES_PER_PLAYER 9
 
-// Error messages
-#define ERROR_LOADING_TEXTURE "Error loading texture!"
-#define ERROR_ILLEGAL_MOVE "This cannot make this move."
-#define ERROR_ILLEGAL_REMOVE "You cannot remove this piece."
-
 class Board
 {
 private:
@@ -24,9 +20,10 @@ private:
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
 
-	Point points[24];
+	std::vector<Point *> points;
 	std::vector<Piece *> pieces;
 
+	Point* currentlySelectedPoint = nullptr;
 	Piece* currentlySelectedPiece = nullptr;
 
 
@@ -40,6 +37,13 @@ public:
 	Board();
 	virtual ~Board();
 
+	// Accessors
+	Piece* GetCurrentlySelectedPiece();
+	Point* GetCurrentlySelectedPoint();
+	bool HasUnplacedPieces();
+
 	// Functions
-	void Render(sf::RenderWindow* window);
+	void Render(sf::RenderWindow* window, float deltaTime);
+	void Update(sf::RenderWindow* window);
+	Piece* GetNextAvailablePiece(int currentPlayerIndex);
 };

@@ -1,31 +1,55 @@
 #include "Piece.h"
 
+Piece::Piece(OwnershipType pieceOwnership, sf::Vector2f startingPosition)
+{
+	this->pieceOwnership = pieceOwnership;
+	this->Button::position = startingPosition;
+	this->targetPosition = startingPosition;
+	this->pieceState = PieceState::UNPLACED;
+	this->LoadTexture();
+}
+
+PieceState Piece::GetPieceState()
+{
+	return this->pieceState;
+}
+
+OwnershipType Piece::GetOwnershipType()
+{
+	return this->pieceOwnership;
+}
+
 void Piece::LoadTexture()
 {
-	std::string textureName = this->pieceOwnership == Ownership::PlayerOne ? "white_piece.png" : "black_piece.png";
+	std::string textureName = this->pieceOwnership == OwnershipType::PLAYERONE ? "white_piece.png" : "black_piece.png";
 
-	if (!this->pieceTexture.loadFromFile("Textures/" + textureName))
+	if (!this->buttonTexture.loadFromFile("Textures/" + textureName))
 	{
 		std::cout << ERROR_LOADING_TEXTURE << std::endl;
 	}
 
-	pieceSprite = sf::Sprite(this->pieceTexture);
-	pieceSprite.setPosition(this->startingPosition);
-}
-
-Piece::Piece(Ownership pieceOwnership, sf::Vector2f startingPosition)
-{
-	this->pieceOwnership = pieceOwnership;
-	this->startingPosition = startingPosition;
-	this->LoadTexture();
+	this->Button::rect.setTexture(&this->buttonTexture);
+	this->Button::rect.setPosition(this->targetPosition);
 }
 
 void Piece::SetPosition(sf::Vector2f position)
 {
-	this->position = position;
+	this->targetPosition = position;
 }
 
-void Piece::Render(sf::RenderWindow* window)
+void Piece::SetPieceState(PieceState newState)
 {
-	window->draw(this->pieceSprite);
+	this->pieceState = newState;
+}
+
+void Piece::Render(sf::RenderWindow* window, float deltaTime)
+{
+	float weight = this->moveLerpWeight * (deltaTime * 0.001f);
+	weight = weight > 1.0f ? 1.0f : weight;
+	sf::Vector2f distance = this->targetPosition - Button::position;
+
+	Button::position = (this->GetPosition() + distance * weight);
+	Button::rect.setPosition(Button::position - sf::Vector2f(16.0f, 16.0f));
+
+	Button::Render(window);
 }

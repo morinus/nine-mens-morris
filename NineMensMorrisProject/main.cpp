@@ -4,6 +4,7 @@ int main()
 {
 	// Init game engine
 	Game game;
+	sf::Clock clock;
 
 	// Game loop
 	while (game.GetWindowIsOpen())
@@ -12,7 +13,7 @@ int main()
 		game.Update();
 
 		// Render
-		game.Render();
+		game.Render(clock.restart().asMilliseconds());
 	}
 
 	return 0;

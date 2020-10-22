@@ -2,8 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
-#define ERROR_LOADING_FONT "Error while loading font"
+#include "ErrorMessageStrings.h"
 
 class Text
 {
