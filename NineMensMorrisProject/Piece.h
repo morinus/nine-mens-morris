@@ -18,7 +18,8 @@ enum OwnershipType
 enum PieceState
 {
 	UNPLACED,
-	PLACED
+	PLACED,
+	REMOVED
 };
 
 class Piece : public Button
@@ -28,13 +29,14 @@ private:
 	float moveLerpWeight = 10.0f;
 
 	sf::Vector2f targetPosition;
+	sf::Vector2f originalPosition;
 	OwnershipType pieceOwnership;
 	PieceState pieceState;
 
 	void LoadTexture();
 public:
 	// Constructor
-	Piece(OwnershipType pieceOwnership, sf::Vector2f startingPosition);
+	Piece(OwnershipType pieceOwnership, sf::Vector2f position);
 
 	// Accessors
 	PieceState GetPieceState();

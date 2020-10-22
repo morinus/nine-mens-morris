@@ -1,10 +1,11 @@
 #include "Piece.h"
 
-Piece::Piece(OwnershipType pieceOwnership, sf::Vector2f startingPosition)
+Piece::Piece(OwnershipType pieceOwnership, sf::Vector2f position)
 {
 	this->pieceOwnership = pieceOwnership;
-	this->Button::position = startingPosition;
-	this->targetPosition = startingPosition;
+	this->originalPosition = position;
+	this->Button::position = position;
+	this->targetPosition = position;
 	this->pieceState = PieceState::UNPLACED;
 	this->LoadTexture();
 }
