@@ -30,6 +30,7 @@ private:
 	// Private functions
 	void InitBackground();
 	void InitPoints();
+	void InitLines();
 	void InitPieces();
 
 public:

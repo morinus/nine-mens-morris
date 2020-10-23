@@ -4,6 +4,7 @@ Board::Board()
 {
 	this->InitBackground();
 	this->InitPoints();
+	this->InitLines();
 	this->InitPieces();
 }
 
@@ -48,6 +49,11 @@ void Board::InitPoints()
 	this->points.push_back(new Point(21, sf::Vector2f(30.0f, 407.0f)));
 	this->points.push_back(new Point(22, sf::Vector2f(219.0f, 407.0f)));
 	this->points.push_back(new Point(23, sf::Vector2f(410.0f, 407.0f)));
+}
+
+void Board::InitLines()
+{
+
 }
 
 void Board::InitPieces()

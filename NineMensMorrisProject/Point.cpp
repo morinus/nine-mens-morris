@@ -10,9 +10,9 @@ Point::Point(int id, sf::Vector2f position)
 	this->Button::rect.setFillColor(sf::Color::Transparent);
 }
 
-const Piece Point::GetPiece() const
+Piece* Point::GetPiece()
 {
-	return *this->piece;
+	return this->piece;
 }
 
 const bool Point::IsOccupied() const

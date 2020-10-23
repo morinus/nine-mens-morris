@@ -20,7 +20,7 @@ public:
 	Point(int id, sf::Vector2f position);
 
 	// Accessors
-	const Piece GetPiece() const;
+	Piece* GetPiece();
 	const bool IsOccupied() const;
 	const bool IsSelected() const;
 	const int GetId() const;
