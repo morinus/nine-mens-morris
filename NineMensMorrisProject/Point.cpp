@@ -46,6 +46,11 @@ void Point::Deselect()
 	this->isSelected = false;
 }
 
+void Point::ConnectPoint(Point * point)
+{
+	this->connectedPoints.push_back(point);
+}
+
 void Point::Update(sf::RenderWindow* window)
 {
 	if (this->isJustReleased)

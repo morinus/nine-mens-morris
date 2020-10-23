@@ -49,6 +49,94 @@ void Board::InitPoints()
 	this->points.push_back(new Point(21, sf::Vector2f(30.0f, 407.0f)));
 	this->points.push_back(new Point(22, sf::Vector2f(219.0f, 407.0f)));
 	this->points.push_back(new Point(23, sf::Vector2f(410.0f, 407.0f)));
+
+	// Forming point connects to other points
+	this->points[0]->ConnectPoint(this->points[1]);
+	this->points[0]->ConnectPoint(this->points[9]);
+
+	this->points[1]->ConnectPoint(this->points[0]);
+	this->points[1]->ConnectPoint(this->points[2]);
+	this->points[1]->ConnectPoint(this->points[4]);
+
+	this->points[2]->ConnectPoint(this->points[1]);
+	this->points[2]->ConnectPoint(this->points[14]);
+
+	this->points[3]->ConnectPoint(this->points[4]);
+	this->points[3]->ConnectPoint(this->points[10]);
+
+	this->points[4]->ConnectPoint(this->points[1]);
+	this->points[4]->ConnectPoint(this->points[3]);
+	this->points[4]->ConnectPoint(this->points[7]);
+	this->points[4]->ConnectPoint(this->points[5]);
+
+	this->points[5]->ConnectPoint(this->points[4]);
+	this->points[5]->ConnectPoint(this->points[13]);
+
+	this->points[6]->ConnectPoint(this->points[7]);
+	this->points[6]->ConnectPoint(this->points[11]);
+
+	this->points[7]->ConnectPoint(this->points[6]);
+	this->points[7]->ConnectPoint(this->points[8]);
+	this->points[7]->ConnectPoint(this->points[4]);
+
+	this->points[8]->ConnectPoint(this->points[7]);
+	this->points[8]->ConnectPoint(this->points[12]);
+
+	this->points[9]->ConnectPoint(this->points[0]);
+	this->points[9]->ConnectPoint(this->points[21]);
+	this->points[9]->ConnectPoint(this->points[10]);
+
+	this->points[10]->ConnectPoint(this->points[9]);
+	this->points[10]->ConnectPoint(this->points[3]);
+	this->points[10]->ConnectPoint(this->points[11]);
+	this->points[10]->ConnectPoint(this->points[18]);
+
+	this->points[11]->ConnectPoint(this->points[6]);
+	this->points[11]->ConnectPoint(this->points[10]);
+	this->points[11]->ConnectPoint(this->points[15]);
+
+	this->points[12]->ConnectPoint(this->points[8]);
+	this->points[12]->ConnectPoint(this->points[13]);
+	this->points[12]->ConnectPoint(this->points[17]);
+
+	this->points[13]->ConnectPoint(this->points[8]);
+	this->points[13]->ConnectPoint(this->points[13]);
+	this->points[13]->ConnectPoint(this->points[17]);
+
+	this->points[14]->ConnectPoint(this->points[2]);
+	this->points[14]->ConnectPoint(this->points[13]);
+	this->points[14]->ConnectPoint(this->points[23]);
+
+	this->points[15]->ConnectPoint(this->points[11]);
+	this->points[15]->ConnectPoint(this->points[16]);
+
+	this->points[16]->ConnectPoint(this->points[15]);
+	this->points[16]->ConnectPoint(this->points[17]);
+	this->points[16]->ConnectPoint(this->points[19]);
+
+	this->points[17]->ConnectPoint(this->points[12]);
+	this->points[17]->ConnectPoint(this->points[16]);
+
+	this->points[18]->ConnectPoint(this->points[10]);
+	this->points[18]->ConnectPoint(this->points[19]);
+
+	this->points[19]->ConnectPoint(this->points[16]);
+	this->points[19]->ConnectPoint(this->points[18]);
+	this->points[19]->ConnectPoint(this->points[20]);
+	this->points[19]->ConnectPoint(this->points[22]);
+
+	this->points[20]->ConnectPoint(this->points[13]);
+	this->points[20]->ConnectPoint(this->points[19]);
+
+	this->points[21]->ConnectPoint(this->points[9]);
+	this->points[21]->ConnectPoint(this->points[22]);
+
+	this->points[22]->ConnectPoint(this->points[21]);
+	this->points[22]->ConnectPoint(this->points[19]);
+	this->points[22]->ConnectPoint(this->points[23]);
+
+	this->points[23]->ConnectPoint(this->points[14]);
+	this->points[23]->ConnectPoint(this->points[22]);
 }
 
 void Board::InitLines()

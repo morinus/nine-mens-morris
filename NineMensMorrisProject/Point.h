@@ -15,6 +15,8 @@ private:
 	Piece* piece = nullptr;
 	bool isSelected = false;
 
+	std::vector<Point*> connectedPoints;
+
 public:
 	// Constructor
 	Point(int id, sf::Vector2f position);
@@ -29,6 +31,7 @@ public:
 	void PlacePiece(Piece* piece);
 	void RemovePiece();
 	void Deselect();
+	void ConnectPoint(Point* point);
 	void Update(sf::RenderWindow* window);
 };
 

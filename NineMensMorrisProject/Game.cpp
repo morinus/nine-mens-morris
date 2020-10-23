@@ -140,6 +140,11 @@ void Game::ProcessCurrentGameState()
 		}
 
 		break;
+
+	case GameState::MOVING:
+		currentlySelectedPoint = this->board->GetCurrentlySelectedPoint();
+
+		break;
 	}
 }
 
