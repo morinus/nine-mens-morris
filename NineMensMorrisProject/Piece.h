@@ -44,6 +44,7 @@ public:
 
 	// Accessors
 	PieceState GetPieceState();
+	Point* GetConnectedPoint();
 	OwnershipType GetOwnershipType();
 
 	// Functions
@@ -51,6 +52,7 @@ public:
 	void SetPieceState(PieceState newState);
 	void ConnectPoint(Point* point);
 	void Remove();
+	void Move(Point* point);
 	void Render(sf::RenderWindow* window, int deltaTime);
 };
 

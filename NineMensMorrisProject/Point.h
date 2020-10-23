@@ -30,8 +30,11 @@ public:
 	// Functions
 	void PlacePiece(Piece* piece);
 	void RemovePiece();
+	void EmptyPoint();
 	void Deselect();
 	void ConnectPoint(Point* point);
+	bool IsConnectedTo(Point* point);
+	bool HasFreeConnectedPoints();
 	void Update(sf::RenderWindow* window);
 };
 

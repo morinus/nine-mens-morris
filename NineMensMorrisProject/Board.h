@@ -6,6 +6,7 @@
 #include "Piece.h"
 #include "ErrorMessageStrings.h"
 #include "Line.h"
+#include "Text.h"
 
 /*
 	Class that is responsible for handling the game board.
@@ -21,11 +22,12 @@ private:
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
 
-	std::vector<Point *> points;
-	std::vector<Piece *> pieces;
+	std::vector<Point*> points;
+	std::vector<Piece*> pieces;
 	std::vector<Line* > lines;
 
 	Point* currentlySelectedPoint = nullptr;
+	Point* currentTargetPoint = nullptr;
 	Piece* currentlySelectedPiece = nullptr;
 
 
@@ -34,6 +36,7 @@ private:
 	void InitPoints();
 	void InitLines();
 	void InitPieces();
+	void InitTexts();
 
 public:
 	// Constructor & Destructor
@@ -43,12 +46,15 @@ public:
 	// Accessors
 	Piece* GetCurrentlySelectedPiece();
 	Point* GetCurrentlySelectedPoint();
+	Point* GetCurrentTargetPoint();
 	bool HasUnplacedPieces();
 
 	// Functions
 	void Render(sf::RenderWindow* window, int deltaTime);
 	void Update(sf::RenderWindow* window);
 	void DeselectEverything();
+	void SetCurrentlySelectedPiece(Piece* piece);
+	void SetCurrentlySelectedPoint(Point* point);
 	Piece* GetNextAvailablePiece(int currentPlayerIndex);
 	bool CheckIfLineIsCompletedForCurrentPlayer(int currentPlayerIndex);
 };

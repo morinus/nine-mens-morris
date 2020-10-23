@@ -66,9 +66,15 @@ void Game::ChangeGameState(GameState newGameState)
 	this->currentGameState = newGameState;
 }
 
+void Game::ChangeMovingStateSelection(MovingStateSelection newMovingStateSelection)
+{
+	this->currentMovingStateSelection = newMovingStateSelection;
+}
+
 void Game::ProcessCurrentGameState()
 {
 	Point* currentlySelectedPoint = nullptr;
+	Point* currentTargetPoint = nullptr;
 
 	switch (this->currentGameState)
 	{
@@ -86,6 +92,8 @@ void Game::ProcessCurrentGameState()
 
 				currentlySelectedPoint->PlacePiece(piece);
 				currentlySelectedPoint = nullptr;
+
+				this->board->DeselectEverything();
 
 				if (this->board->CheckIfLineIsCompletedForCurrentPlayer(this->currentPlayerIndex))
 				{
@@ -121,7 +129,6 @@ void Game::ProcessCurrentGameState()
 			}
 
 			pointPiece->Remove();
-			currentlySelectedPoint->RemovePiece();
 			currentlySelectedPoint->Deselect();
 			this->board->DeselectEverything();
 
@@ -143,6 +150,57 @@ void Game::ProcessCurrentGameState()
 
 	case GameState::MOVING:
 		currentlySelectedPoint = this->board->GetCurrentlySelectedPoint();
+		if (currentlySelectedPoint != nullptr)
+		{
+			if (currentMovingStateSelection == MovingStateSelection::SELECTING_PIECE)
+			{
+				// Check if piece belowing to current player
+				if (currentlySelectedPoint->GetPiece() != nullptr)
+				{
+					if (currentlySelectedPoint->GetPiece()->GetOwnershipType() == currentPlayerIndex)
+					{
+						// Check if piece can be moved
+						if (currentlySelectedPoint->HasFreeConnectedPoints())
+						{
+							// Set currently selected piece
+							this->board->SetCurrentlySelectedPiece(currentlySelectedPoint->GetPiece());
+							this->ChangeMovingStateSelection(MovingStateSelection::SELECTING_POINT);
+							this->board->SetCurrentlySelectedPoint(nullptr);
+							currentlySelectedPoint = nullptr;
+
+							break;
+						}
+
+						this->board->DeselectEverything();
+					}
+				}
+			}
+			else {
+				// If currentlySelectedPoint as target point is connected to currently selected piece
+				if (this->board->GetCurrentlySelectedPiece() != nullptr)
+				{
+					if (this->board->GetCurrentlySelectedPiece()->GetConnectedPoint()->IsConnectedTo(currentlySelectedPoint))
+					{
+						// If currentlySelectedPoint is free
+						if (currentlySelectedPoint->GetPiece() == nullptr)
+						{
+							this->board->GetCurrentlySelectedPiece()->Move(currentlySelectedPoint);
+							this->ChangeMovingStateSelection(MovingStateSelection::SELECTING_PIECE);
+
+							if (this->board->CheckIfLineIsCompletedForCurrentPlayer(this->currentPlayerIndex))
+							{
+								this->ChangeGameState(GameState::REMOVING);
+								break;
+							}
+
+							this->ChangeTurn();
+
+							break;
+						}
+					}
+				}
+			}
+		}
 
 		break;
 	}

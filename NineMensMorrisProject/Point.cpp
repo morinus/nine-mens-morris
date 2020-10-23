@@ -38,6 +38,12 @@ void Point::PlacePiece(Piece* piece)
 
 void Point::RemovePiece()
 {
+	this->piece->SetPieceState(PieceState::REMOVED);
+	this->piece = nullptr;
+}
+
+void Point::EmptyPoint()
+{
 	this->piece = nullptr;
 }
 
@@ -46,9 +52,35 @@ void Point::Deselect()
 	this->isSelected = false;
 }
 
-void Point::ConnectPoint(Point * point)
+void Point::ConnectPoint(Point* point)
 {
 	this->connectedPoints.push_back(point);
+}
+
+bool Point::IsConnectedTo(Point* point)
+{
+	for (auto connectedPoint : connectedPoints)
+	{
+		if (connectedPoint == point)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Point::HasFreeConnectedPoints()
+{
+	for (auto connectedPoint : connectedPoints)
+	{
+		if (connectedPoint->GetPiece() == nullptr)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void Point::Update(sf::RenderWindow* window)

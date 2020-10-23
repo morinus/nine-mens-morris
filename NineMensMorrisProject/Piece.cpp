@@ -16,6 +16,11 @@ PieceState Piece::GetPieceState()
 	return this->pieceState;
 }
 
+Point* Piece::GetConnectedPoint()
+{
+	return this->connectedPoint;
+}
+
 OwnershipType Piece::GetOwnershipType()
 {
 	return this->pieceOwnership;
@@ -55,6 +60,14 @@ void Piece::Remove()
 	this->connectedPoint = nullptr;
 	this->targetPosition = this->originalPosition;
 	this->rect.setFillColor(sf::Color::Red);
+}
+
+void Piece::Move(Point * point)
+{
+	this->connectedPoint->EmptyPoint();
+	this->ConnectPoint(point);
+	this->SetPosition(point->GetPosition());
+	point->PlacePiece(this);
 }
 
 void Piece::Render(sf::RenderWindow* window, int deltaTime)

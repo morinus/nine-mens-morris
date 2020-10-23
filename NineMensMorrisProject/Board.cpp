@@ -285,6 +285,17 @@ void Board::DeselectEverything()
 {
 	this->currentlySelectedPiece = nullptr;
 	this->currentlySelectedPoint = nullptr;
+	this->currentTargetPoint = nullptr;
+}
+
+void Board::SetCurrentlySelectedPiece(Piece * piece)
+{
+	this->currentlySelectedPiece = piece;
+}
+
+void Board::SetCurrentlySelectedPoint(Point * point)
+{
+	this->currentlySelectedPoint = point;
 }
 
 Piece* Board::GetNextAvailablePiece(int currentPlayerIndex)
@@ -325,6 +336,11 @@ Piece * Board::GetCurrentlySelectedPiece()
 Point * Board::GetCurrentlySelectedPoint()
 {
 	return this->currentlySelectedPoint;
+}
+
+Point * Board::GetCurrentTargetPoint()
+{
+	return this->currentTargetPoint;
 }
 
 bool Board::HasUnplacedPieces()

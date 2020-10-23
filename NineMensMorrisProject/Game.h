@@ -16,11 +16,18 @@ enum GameState
 	ENDGAME
 };
 
+enum MovingStateSelection
+{
+	SELECTING_PIECE,
+	SELECTING_POINT
+};
+
 class Game
 {
 private:
 	// Variables
 	GameState currentGameState;
+	MovingStateSelection currentMovingStateSelection;
 	Board* board;
 	int currentPlayerIndex;
 
@@ -33,6 +40,7 @@ private:
 	void InitVariables();
 	void InitWindow();
 	void ChangeGameState(GameState newGameState);
+	void ChangeMovingStateSelection(MovingStateSelection newMovingStateSelection);
 	void UpdatePollEvents();
 	void ProcessCurrentGameState();
 	void ChangeTurn();
