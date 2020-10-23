@@ -80,8 +80,10 @@ void Game::ProcessCurrentGameState()
 			{
 				auto piece = this->board->GetNextAvailablePiece(this->currentPlayerIndex);
 				piece->SetPosition(currentlySelectedPoint->GetPosition());
+				piece->ConnectPoint(currentlySelectedPoint);
 
 				currentlySelectedPoint->PlacePiece(piece);
+
 				currentlySelectedPoint = nullptr;
 
 				this->ChangeTurn();

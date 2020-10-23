@@ -5,6 +5,9 @@
 #include "ErrorMessageStrings.h"
 #include "Button.h"
 
+// Fix to avoid recursive referencing
+class Point;
+
 /*
 	Class for handling game pieces.
 */
@@ -32,6 +35,7 @@ private:
 	sf::Vector2f originalPosition;
 	OwnershipType pieceOwnership;
 	PieceState pieceState;
+	Point* connectedPoint = nullptr;
 
 	void LoadTexture();
 public:
@@ -45,6 +49,8 @@ public:
 	// Functions
 	void SetPosition(sf::Vector2f position);
 	void SetPieceState(PieceState newState);
+	void ConnectPoint(Point* point);
+	void Remove();
 	void Render(sf::RenderWindow* window, int deltaTime);
 };
 

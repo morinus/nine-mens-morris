@@ -1,4 +1,5 @@
 #include "Piece.h"
+#include "Point.h"
 
 Piece::Piece(OwnershipType pieceOwnership, sf::Vector2f position)
 {
@@ -41,6 +42,18 @@ void Piece::SetPosition(sf::Vector2f position)
 void Piece::SetPieceState(PieceState newState)
 {
 	this->pieceState = newState;
+}
+
+void Piece::ConnectPoint(Point * point)
+{
+	this->connectedPoint = point;
+}
+
+void Piece::Remove()
+{
+	this->connectedPoint->RemovePiece();
+	this->connectedPoint = nullptr;
+	this->targetPosition = this->originalPosition;
 }
 
 void Piece::Render(sf::RenderWindow* window, int deltaTime)
