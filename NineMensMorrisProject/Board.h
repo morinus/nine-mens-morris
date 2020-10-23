@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "Piece.h"
 #include "ErrorMessageStrings.h"
+#include "Line.h"
 
 /*
 	Class that is responsible for handling the game board.
@@ -22,6 +23,7 @@ private:
 
 	std::vector<Point *> points;
 	std::vector<Piece *> pieces;
+	std::vector<Line* > lines;
 
 	Point* currentlySelectedPoint = nullptr;
 	Piece* currentlySelectedPiece = nullptr;
@@ -46,5 +48,7 @@ public:
 	// Functions
 	void Render(sf::RenderWindow* window, int deltaTime);
 	void Update(sf::RenderWindow* window);
+	void DeselectEverything();
 	Piece* GetNextAvailablePiece(int currentPlayerIndex);
+	bool CheckIfLineIsCompletedForCurrentPlayer(int currentPlayerIndex);
 };

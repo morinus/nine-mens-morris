@@ -68,10 +68,12 @@ void Game::ChangeGameState(GameState newGameState)
 
 void Game::ProcessCurrentGameState()
 {
+	Point* currentlySelectedPoint = nullptr;
+
 	switch (this->currentGameState)
 	{
 	case GameState::PLACING:
-		Point* currentlySelectedPoint = this->board->GetCurrentlySelectedPoint();
+		currentlySelectedPoint = this->board->GetCurrentlySelectedPoint();
 		if (currentlySelectedPoint != nullptr)
 		{
 			bool isOccupied = currentlySelectedPoint->IsOccupied();
@@ -83,8 +85,13 @@ void Game::ProcessCurrentGameState()
 				piece->ConnectPoint(currentlySelectedPoint);
 
 				currentlySelectedPoint->PlacePiece(piece);
-
 				currentlySelectedPoint = nullptr;
+
+				if (this->board->CheckIfLineIsCompletedForCurrentPlayer(this->currentPlayerIndex))
+				{
+					this->ChangeGameState(GameState::REMOVING);
+					break;
+				}
 
 				this->ChangeTurn();
 
@@ -93,6 +100,42 @@ void Game::ProcessCurrentGameState()
 					this->ChangeGameState(GameState::MOVING);
 					break;
 				}
+			}
+		}
+
+		break;
+
+	case GameState::REMOVING:
+		currentlySelectedPoint = this->board->GetCurrentlySelectedPoint();
+		if (currentlySelectedPoint != nullptr)
+		{
+			auto pointPiece = currentlySelectedPoint->GetPiece();
+			if (pointPiece == nullptr)
+			{
+				break;
+			}
+
+			if (pointPiece->GetOwnershipType() == this->currentPlayerIndex)
+			{
+				break;
+			}
+
+			pointPiece->Remove();
+			currentlySelectedPoint->RemovePiece();
+			currentlySelectedPoint->Deselect();
+			this->board->DeselectEverything();
+
+			this->ChangeTurn();
+
+			if (!this->board->HasUnplacedPieces())
+			{
+				this->ChangeGameState(GameState::MOVING);
+				break;
+			}
+			else
+			{
+				this->ChangeGameState(GameState::PLACING);
+				break;
 			}
 		}
 

@@ -46,5 +46,12 @@ bool Line::IsMillCompleted()
 		}
 	}
 
+	if (this->isEnabled)
+	{
+		return false;
+	}
+
+	this->isEnabled = true;
+
 	return true;
 }

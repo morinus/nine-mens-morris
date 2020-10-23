@@ -5,12 +5,13 @@
 class Line
 {
 private:
-	std::vector<Point*> connectedPoints;
 	bool isEnabled = false;
 
 public:
 	Line();
 	~Line();
+
+	std::vector<Point*> connectedPoints;
 
 	void ConnectPoint(Point* point);
 	void Disable();

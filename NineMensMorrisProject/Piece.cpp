@@ -54,6 +54,7 @@ void Piece::Remove()
 	this->connectedPoint->RemovePiece();
 	this->connectedPoint = nullptr;
 	this->targetPosition = this->originalPosition;
+	this->rect.setFillColor(sf::Color::Red);
 }
 
 void Piece::Render(sf::RenderWindow* window, int deltaTime)
