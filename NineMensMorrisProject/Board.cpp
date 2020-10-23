@@ -1,5 +1,4 @@
-#include "Board.h";
-
+#include "Board.h"
 
 Board::Board()
 {
@@ -60,7 +59,7 @@ void Board::InitPieces()
 	}
 }
 
-void Board::Render(sf::RenderWindow* window, float deltaTime)
+void Board::Render(sf::RenderWindow* window, int deltaTime)
 {
 	window->draw(background);
 
@@ -99,6 +98,8 @@ Piece* Board::GetNextAvailablePiece(int currentPlayerIndex)
 			return piece;
 		}
 	}
+
+	return nullptr;
 }
 
 Piece * Board::GetCurrentlySelectedPiece()

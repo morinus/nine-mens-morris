@@ -43,7 +43,7 @@ void Piece::SetPieceState(PieceState newState)
 	this->pieceState = newState;
 }
 
-void Piece::Render(sf::RenderWindow* window, float deltaTime)
+void Piece::Render(sf::RenderWindow* window, int deltaTime)
 {
 	float weight = this->moveLerpWeight * (deltaTime * 0.001f);
 	weight = weight > 1.0f ? 1.0f : weight;

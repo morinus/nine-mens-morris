@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "ErrorMessageStrings.h"
 #include "Button.h"
@@ -45,6 +45,6 @@ public:
 	// Functions
 	void SetPosition(sf::Vector2f position);
 	void SetPieceState(PieceState newState);
-	void Render(sf::RenderWindow* window, float deltaTime);
+	void Render(sf::RenderWindow* window, int deltaTime);
 };
 

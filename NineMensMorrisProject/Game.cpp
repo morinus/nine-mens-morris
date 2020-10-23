@@ -52,7 +52,7 @@ void Game::Update()
 	this->ProcessCurrentGameState();
 }
 
-void Game::Render(float deltaTime)
+void Game::Render(int deltaTime)
 {
 	this->window->clear(sf::Color::White);
 

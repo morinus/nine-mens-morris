@@ -43,7 +43,7 @@ public:
 	bool HasUnplacedPieces();
 
 	// Functions
-	void Render(sf::RenderWindow* window, float deltaTime);
+	void Render(sf::RenderWindow* window, int deltaTime);
 	void Update(sf::RenderWindow* window);
 	Piece* GetNextAvailablePiece(int currentPlayerIndex);
 };

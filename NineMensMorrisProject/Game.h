@@ -47,5 +47,5 @@ public:
 
 	// Functions
 	void Update();
-	void Render(float deltaTime);
+	void Render(int deltaTime);
 };
