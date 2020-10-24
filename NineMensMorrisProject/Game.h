@@ -42,6 +42,7 @@ private:
 	void ChangeGameState(GameState newGameState);
 	void ChangeMovingStateSelection(MovingStateSelection newMovingStateSelection);
 	void UpdatePollEvents();
+	void UpdateGameStatusTexts();
 	void ProcessCurrentGameState();
 	void ChangeTurn();
 

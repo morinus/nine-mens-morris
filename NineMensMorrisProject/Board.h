@@ -30,6 +30,11 @@ private:
 	Point* currentTargetPoint = nullptr;
 	Piece* currentlySelectedPiece = nullptr;
 
+	Text* playerOneTitleText;
+	Text* playerTwoTitleText;
+	Text* currentPlayerText;
+	Text* currentActionText;
+
 
 	// Private functions
 	void InitBackground();
@@ -55,6 +60,9 @@ public:
 	void DeselectEverything();
 	void SetCurrentlySelectedPiece(Piece* piece);
 	void SetCurrentlySelectedPoint(Point* point);
+	void SetCurrentPlayerText(std::string string);
+	void SetCurrentActionText(std::string string);
+	bool CheckIfCurrentPlayerWon(int currentPlayer);
 	Piece* GetNextAvailablePiece(int currentPlayerIndex);
 	bool CheckIfLineIsCompletedForCurrentPlayer(int currentPlayerIndex);
 };

@@ -6,6 +6,7 @@ Board::Board()
 	this->InitPoints();
 	this->InitLines();
 	this->InitPieces();
+	this->InitTexts();
 }
 
 Board::~Board()
@@ -200,7 +201,7 @@ void Board::InitLines()
 	line9->ConnectPoint(points[10]);
 	line9->ConnectPoint(points[18]);
 
-	line10->ConnectPoint(points[8]);
+	line10->ConnectPoint(points[6]);
 	line10->ConnectPoint(points[11]);
 	line10->ConnectPoint(points[15]);
 
@@ -247,14 +248,29 @@ void Board::InitPieces()
 {
 	for (int i = 0; i < PIECES_PER_PLAYER; i++)
 	{
-		this->pieces.push_back(new Piece(OwnershipType::PLAYERONE, sf::Vector2f(500.0f, 35.0f + (15.0f * i))));
-		this->pieces.push_back(new Piece(OwnershipType::PLAYERTWO, sf::Vector2f(650.0f, 35.0f + (15.0f * i))));
+		this->pieces.push_back(new Piece(OwnershipType::PLAYERONE, sf::Vector2f(500.0f, 65.0f + (15.0f * i))));
+		this->pieces.push_back(new Piece(OwnershipType::PLAYERTWO, sf::Vector2f(650.0f, 65.0f + (15.0f * i))));
 	}
+}
+
+void Board::InitTexts()
+{
+	this->playerOneTitleText = new Text(sf::Vector2f(450.0f, 10.0f), "-Player 1-");
+	this->playerTwoTitleText = new Text(sf::Vector2f(600.0f, 10.0f), "-Player 2-");
+
+	this->currentPlayerText = new Text(sf::Vector2f(480.0f, 250.0f), "CURRENT_PLAYER");
+	this->currentActionText = new Text(sf::Vector2f(480.0f, 300.0f), "CURRENT_ACTION");
+	this->currentActionText->SetColor(sf::Color::Blue);
+	this->currentActionText->SetCharacterSize(16);
 }
 
 void Board::Render(sf::RenderWindow* window, int deltaTime)
 {
 	window->draw(background);
+	playerOneTitleText->Render(window);
+	playerTwoTitleText->Render(window);
+	currentPlayerText->Render(window);
+	currentActionText->Render(window);
 
 	for (auto point : this->points)
 	{
@@ -296,6 +312,34 @@ void Board::SetCurrentlySelectedPiece(Piece * piece)
 void Board::SetCurrentlySelectedPoint(Point * point)
 {
 	this->currentlySelectedPoint = point;
+}
+
+void Board::SetCurrentPlayerText(std::string string)
+{
+	this->currentPlayerText->SetText(string);
+}
+
+void Board::SetCurrentActionText(std::string string)
+{
+	this->currentActionText->SetText(string);
+}
+
+bool Board::CheckIfCurrentPlayerWon(int currentPlayer)
+{
+	std::vector<Piece* > removedPieces;
+
+	for (auto piece : this->pieces)
+	{
+		if (piece->GetOwnershipType() != currentPlayer)
+		{
+			if (piece->GetPieceState() == PieceState::REMOVED)
+			{
+				removedPieces.push_back(piece);
+			}
+		}
+	}
+
+	return removedPieces.size() >= 7;
 }
 
 Piece* Board::GetNextAvailablePiece(int currentPlayerIndex)

@@ -22,5 +22,6 @@ public:
 	void SetPosition(sf::Vector2f position);
 	void SetText(std::string string);
 	void SetColor(sf::Color color);
+	void SetCharacterSize(int size);
 };
 

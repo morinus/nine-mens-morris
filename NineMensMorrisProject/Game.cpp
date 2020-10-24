@@ -4,6 +4,8 @@ Game::Game()
 {
 	this->InitVariables();
 	this->InitWindow();
+
+	this->UpdateGameStatusTexts();
 }
 
 Game::~Game()
@@ -45,6 +47,38 @@ void Game::UpdatePollEvents()
 	}
 }
 
+void Game::UpdateGameStatusTexts()
+{
+	auto currentPlayerString = this->currentPlayerIndex == 0 ? "Player 1" : "Player 2";
+	this->board->SetCurrentPlayerText(currentPlayerString);
+
+	std::string currentActionString;
+	switch (this->currentGameState)
+	{
+	case GameState::MOVING:
+		if (this->currentMovingStateSelection == MovingStateSelection::SELECTING_PIECE)
+		{
+			currentActionString = "Select your piece!";
+		}
+		else
+		{
+			currentActionString = "Select target point!";
+		}
+		break;
+	case GameState::PLACING:
+		currentActionString = "Place your piece to empty point!";
+		break;
+	case GameState::REMOVING:
+		currentActionString = "Remove opponent's piece!";
+		break;
+	case GameState::ENDGAME:
+		currentActionString = "WON!";
+		break;
+	}
+
+	this->board->SetCurrentActionText(currentActionString);
+}
+
 void Game::Update()
 {
 	this->UpdatePollEvents();
@@ -73,6 +107,8 @@ void Game::ChangeMovingStateSelection(MovingStateSelection newMovingStateSelecti
 
 void Game::ProcessCurrentGameState()
 {
+	this->UpdateGameStatusTexts();
+
 	Point* currentlySelectedPoint = nullptr;
 	Point* currentTargetPoint = nullptr;
 
@@ -98,6 +134,7 @@ void Game::ProcessCurrentGameState()
 				if (this->board->CheckIfLineIsCompletedForCurrentPlayer(this->currentPlayerIndex))
 				{
 					this->ChangeGameState(GameState::REMOVING);
+
 					break;
 				}
 
@@ -132,6 +169,12 @@ void Game::ProcessCurrentGameState()
 			currentlySelectedPoint->Deselect();
 			this->board->DeselectEverything();
 
+			if (this->board->CheckIfCurrentPlayerWon(this->currentPlayerIndex))
+			{
+				this->ChangeGameState(GameState::ENDGAME);
+				break;
+			}
+
 			this->ChangeTurn();
 
 			if (!this->board->HasUnplacedPieces())
@@ -154,9 +197,9 @@ void Game::ProcessCurrentGameState()
 		{
 			if (currentMovingStateSelection == MovingStateSelection::SELECTING_PIECE)
 			{
-				// Check if piece belowing to current player
 				if (currentlySelectedPoint->GetPiece() != nullptr)
 				{
+					// Check if piece belowing to current player
 					if (currentlySelectedPoint->GetPiece()->GetOwnershipType() == currentPlayerIndex)
 					{
 						// Check if piece can be moved
@@ -203,10 +246,14 @@ void Game::ProcessCurrentGameState()
 		}
 
 		break;
+
+	case::GameState::ENDGAME:
+		break;
 	}
 }
 
 void Game::ChangeTurn()
 {
 	this->currentPlayerIndex = this->currentPlayerIndex == 0 ? 1 : 0;
+	this->UpdateGameStatusTexts();
 }

@@ -38,3 +38,8 @@ void Text::SetColor(sf::Color color)
 {
 	this->text.setFillColor(color);
 }
+
+void Text::SetCharacterSize(int size)
+{
+	this->text.setCharacterSize(size);
+}
