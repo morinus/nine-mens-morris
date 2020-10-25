@@ -4,6 +4,7 @@ int main()
 {
 	// Init game engine
 	Game game;
+
 	sf::Clock clock;
 
 	// Game loop

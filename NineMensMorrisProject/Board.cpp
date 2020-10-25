@@ -324,6 +324,14 @@ void Board::SetCurrentActionText(std::string string)
 	this->currentActionText->SetText(string);
 }
 
+void Board::DisableAllLines()
+{
+	for (auto line : lines)
+	{
+		line->Disable();
+	}
+}
+
 bool Board::CheckIfCurrentPlayerWon(int currentPlayer)
 {
 	std::vector<Piece* > removedPieces;
@@ -339,7 +347,7 @@ bool Board::CheckIfCurrentPlayerWon(int currentPlayer)
 		}
 	}
 
-	return removedPieces.size() >= 7;
+	return removedPieces.size() >= PIECES_PER_PLAYER - 2;
 }
 
 Piece* Board::GetNextAvailablePiece(int currentPlayerIndex)

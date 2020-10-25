@@ -35,7 +35,6 @@ const bool Game::GetWindowIsOpen() const
 
 void Game::UpdatePollEvents()
 {
-	// Event polling
 	while (this->window->pollEvent(this->ev))
 	{
 		switch (this->ev.type)
@@ -53,6 +52,7 @@ void Game::UpdateGameStatusTexts()
 	this->board->SetCurrentPlayerText(currentPlayerString);
 
 	std::string currentActionString;
+
 	switch (this->currentGameState)
 	{
 	case GameState::MOVING:
@@ -199,13 +199,13 @@ void Game::ProcessCurrentGameState()
 			{
 				if (currentlySelectedPoint->GetPiece() != nullptr)
 				{
-					// Check if piece belowing to current player
+					// If piece belongs to current player
 					if (currentlySelectedPoint->GetPiece()->GetOwnershipType() == currentPlayerIndex)
 					{
-						// Check if piece can be moved
+						// If piece can be moved
 						if (currentlySelectedPoint->HasFreeConnectedPoints())
 						{
-							// Set currently selected piece
+							// Move currently selected piece
 							this->board->SetCurrentlySelectedPiece(currentlySelectedPoint->GetPiece());
 							this->ChangeMovingStateSelection(MovingStateSelection::SELECTING_POINT);
 							this->board->SetCurrentlySelectedPoint(nullptr);
