@@ -53,6 +53,7 @@ public:
 	void ConnectPoint(Point* point);
 	void Remove();
 	void Move(Point* point);
+	void Reset();
 	void Render(sf::RenderWindow* window, int deltaTime);
 };
 

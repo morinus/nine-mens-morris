@@ -42,6 +42,11 @@ void Game::UpdatePollEvents()
 		case sf::Event::Closed:
 			this->window->close();
 			break;
+		case sf::Event::KeyPressed:
+			if (this->ev.key.code == sf::Keyboard::R)
+			{
+				this->ResetGame();
+			}
 		}
 	}
 }
@@ -256,4 +261,12 @@ void Game::ChangeTurn()
 {
 	this->currentPlayerIndex = this->currentPlayerIndex == 0 ? 1 : 0;
 	this->UpdateGameStatusTexts();
+}
+
+void Game::ResetGame()
+{
+	this->board->Reset();
+	this->currentPlayerIndex = rand() % 2;
+	this->currentGameState = GameState::PLACING;
+	this->currentMovingStateSelection = MovingStateSelection::SELECTING_PIECE;
 }

@@ -57,6 +57,12 @@ void Point::ConnectPoint(Point* point)
 	this->connectedPoints.push_back(point);
 }
 
+void Point::Reset()
+{
+	this->EmptyPoint();
+	this->Deselect();
+}
+
 bool Point::IsConnectedTo(Point* point)
 {
 	for (auto connectedPoint : connectedPoints)

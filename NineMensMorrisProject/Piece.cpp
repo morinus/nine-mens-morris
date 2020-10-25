@@ -70,6 +70,15 @@ void Piece::Move(Point * point)
 	point->PlacePiece(this);
 }
 
+void Piece::Reset()
+{
+	this->connectedPoint = nullptr;
+	this->isJustReleased = false;
+	this->isPressed = false;
+	this->SetPosition(this->originalPosition);
+	this->pieceState = PieceState::UNPLACED;
+}
+
 void Piece::Render(sf::RenderWindow* window, int deltaTime)
 {
 	float weight = this->moveLerpWeight * (deltaTime * 0.001f);

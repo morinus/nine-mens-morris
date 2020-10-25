@@ -297,6 +297,24 @@ void Board::Update(sf::RenderWindow* window)
 	}
 }
 
+void Board::Reset()
+{
+	for (auto piece : pieces)
+	{
+		piece->Reset();
+	}
+
+	for (auto point : points)
+	{
+		point->Reset();
+	}
+
+	for (auto line : lines)
+	{
+		line->Disable();
+	}
+}
+
 void Board::DeselectEverything()
 {
 	this->currentlySelectedPiece = nullptr;

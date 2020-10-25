@@ -57,6 +57,7 @@ public:
 	// Functions
 	void Render(sf::RenderWindow* window, int deltaTime);
 	void Update(sf::RenderWindow* window);
+	void Reset();
 	void DeselectEverything();
 	void SetCurrentlySelectedPiece(Piece* piece);
 	void SetCurrentlySelectedPoint(Point* point);

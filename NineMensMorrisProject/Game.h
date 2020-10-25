@@ -45,6 +45,7 @@ private:
 	void UpdateGameStatusTexts();
 	void ProcessCurrentGameState();
 	void ChangeTurn();
+	void ResetGame();
 
 public:
 	// Construtor & Destructor
