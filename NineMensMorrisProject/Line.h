@@ -2,6 +2,10 @@
 
 #include "Point.h"
 
+/*
+	Class that is responsible for tracking and handling mills (3 of the same piece in a line).
+*/
+
 class Line
 {
 private:

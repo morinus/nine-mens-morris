@@ -64,6 +64,6 @@ public:
 	void SetCurrentActionText(std::string string);
 	void DisableAllLines();
 	bool CheckIfCurrentPlayerWon(int currentPlayer);
-	Piece* GetNextAvailablePiece(int currentPlayerIndex);
 	bool CheckIfLineIsCompletedForCurrentPlayer(int currentPlayerIndex);
+	Piece* GetNextAvailablePiece(int currentPlayerIndex);
 };

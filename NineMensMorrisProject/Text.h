@@ -4,6 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include "ErrorMessageStrings.h"
 
+/*
+	Class for handling and rendering text objects.
+*/
+
 class Text
 {
 private:

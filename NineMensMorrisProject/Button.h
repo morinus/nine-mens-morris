@@ -3,9 +3,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+/*
+	Class which handles button-like behavior.
+*/
+
 class Button
 {
 protected:
+	// Variables
 	sf::Vector2f size;
 	sf::Vector2f position;
 	sf::RectangleShape rect;

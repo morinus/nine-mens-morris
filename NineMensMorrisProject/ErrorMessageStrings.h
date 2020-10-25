@@ -1,5 +1,9 @@
 #pragma once
 
+/*
+	Define strings for different errors
+*/
+
 // Error messages
 #define ERROR_LOADING_TEXTURE "Error loading texture!"
 #define ERROR_LOADING_FONT "Error loading font!"

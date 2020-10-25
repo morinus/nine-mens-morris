@@ -11,6 +11,7 @@
 class Point : public Button
 {
 private:
+	// Variables
 	int id;
 	Piece* piece = nullptr;
 	bool isSelected = false;
