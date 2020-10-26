@@ -100,9 +100,10 @@ void Board::InitPoints()
 	this->points[12]->ConnectPoint(this->points[13]);
 	this->points[12]->ConnectPoint(this->points[17]);
 
-	this->points[13]->ConnectPoint(this->points[8]);
-	this->points[13]->ConnectPoint(this->points[13]);
-	this->points[13]->ConnectPoint(this->points[17]);
+	this->points[13]->ConnectPoint(this->points[5]);
+	this->points[13]->ConnectPoint(this->points[14]);
+	this->points[13]->ConnectPoint(this->points[12]);
+	this->points[13]->ConnectPoint(this->points[20]);
 
 	this->points[14]->ConnectPoint(this->points[2]);
 	this->points[14]->ConnectPoint(this->points[13]);
