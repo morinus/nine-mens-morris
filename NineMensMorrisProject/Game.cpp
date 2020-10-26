@@ -167,7 +167,7 @@ void Game::ProcessCurrentGameState()
 				break;
 			}
 
-			if (pointPiece->GetOwnershipType() == this->currentPlayerIndex)
+			if (pointPiece->GetOwnershipType() == (OwnershipType)this->currentPlayerIndex)
 			{
 				break;
 			}
@@ -208,7 +208,7 @@ void Game::ProcessCurrentGameState()
 				if (currentlySelectedPoint->GetPiece() != nullptr)
 				{
 					// If piece belongs to current player
-					if (currentlySelectedPoint->GetPiece()->GetOwnershipType() == currentPlayerIndex)
+					if (currentlySelectedPoint->GetPiece()->GetOwnershipType() == (OwnershipType)currentPlayerIndex)
 					{
 						// If piece can be moved
 						if (currentlySelectedPoint->HasFreeConnectedPoints())

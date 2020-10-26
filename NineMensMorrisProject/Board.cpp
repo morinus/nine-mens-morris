@@ -351,13 +351,13 @@ void Board::DisableAllLines()
 	}
 }
 
-bool Board::CheckIfCurrentPlayerWon(int currentPlayer)
+const bool Board::CheckIfCurrentPlayerWon(int currentPlayer) const
 {
 	std::vector<Piece* > removedPieces;
 
 	for (auto piece : this->pieces)
 	{
-		if (piece->GetOwnershipType() != currentPlayer)
+		if (piece->GetOwnershipType() != (OwnershipType)currentPlayer)
 		{
 			if (piece->GetPieceState() == PieceState::REMOVED)
 			{
@@ -373,7 +373,7 @@ Piece* Board::GetNextAvailablePiece(int currentPlayerIndex)
 {
 	for (auto piece : pieces)
 	{
-		if (piece->GetOwnershipType() == currentPlayerIndex
+		if (piece->GetOwnershipType() == (OwnershipType)currentPlayerIndex
 			&& piece->GetPieceState() == PieceState::UNPLACED)
 		{
 			return piece;
@@ -383,7 +383,7 @@ Piece* Board::GetNextAvailablePiece(int currentPlayerIndex)
 	return nullptr;
 }
 
-bool Board::CheckIfLineContainingPointIsCompletedForCurrentPlayer(Point* point, int currentPlayerIndex)
+const bool Board::CheckIfLineContainingPointIsCompletedForCurrentPlayer(Point* point, int currentPlayerIndex) const
 {
 	for (auto line : lines)
 	{

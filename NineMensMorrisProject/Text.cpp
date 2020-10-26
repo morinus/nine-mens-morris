@@ -8,6 +8,11 @@ Text::Text(sf::Vector2f position, sf::String text)
 	this->SetColor(sf::Color::Red);
 }
 
+Text::~Text()
+{
+
+}
+
 void Text::Init()
 {
 	if (!this->font.loadFromFile("Fonts/arial.ttf"))

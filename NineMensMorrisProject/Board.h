@@ -64,7 +64,7 @@ public:
 	void SetCurrentPlayerText(std::string string);
 	void SetCurrentActionText(std::string string);
 	void DisableAllLines();
-	bool CheckIfCurrentPlayerWon(int currentPlayer);
-	bool CheckIfLineContainingPointIsCompletedForCurrentPlayer(Point* point, int currentPlayerIndex);
+	const bool CheckIfCurrentPlayerWon(int currentPlayer) const;
+	const bool CheckIfLineContainingPointIsCompletedForCurrentPlayer(Point* point, int currentPlayerIndex) const;
 	Piece* GetNextAvailablePiece(int currentPlayerIndex);
 };

@@ -34,7 +34,7 @@ bool Line::IsMillCompleted(int currentPlayerIndex)
 		}
 
 		OwnershipType pieceOwnershipType = point->GetPiece()->GetOwnershipType();
-		if (currentPlayerIndex != pieceOwnershipType)
+		if ((OwnershipType)currentPlayerIndex != pieceOwnershipType)
 		{
 			return false;
 		}

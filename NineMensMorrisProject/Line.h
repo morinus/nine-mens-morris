@@ -15,7 +15,7 @@ private:
 public:
 	// Constructor & Destructor
 	Line();
-	~Line();
+	virtual ~Line();
 
 	// Public variables
 	std::vector<Point*> connectedPoints;

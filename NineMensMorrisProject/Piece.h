@@ -12,13 +12,13 @@ class Point;
 	Class for handling game pieces.
 */
 
-enum OwnershipType
+enum class OwnershipType
 {
 	PLAYERONE,
 	PLAYERTWO
 };
 
-enum PieceState
+enum class PieceState
 {
 	UNPLACED,
 	PLACED,

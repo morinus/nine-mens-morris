@@ -8,7 +8,7 @@
 	Class that acts as the game engine.
 */
 
-enum GameState
+enum class GameState
 {
 	PLACING,
 	MOVING,
@@ -16,7 +16,7 @@ enum GameState
 	ENDGAME
 };
 
-enum MovingStateSelection
+enum class MovingStateSelection
 {
 	SELECTING_PIECE,
 	SELECTING_POINT

@@ -22,7 +22,7 @@ protected:
 public:
 	// Constructor & Destructor
 	Button();
-	~Button();
+	virtual ~Button();
 
 	// Accessors
 	sf::Vector2f GetPosition();

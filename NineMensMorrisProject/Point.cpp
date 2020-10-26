@@ -10,6 +10,11 @@ Point::Point(int id, sf::Vector2f position)
 	this->Button::rect.setFillColor(sf::Color::Transparent);
 }
 
+Point::~Point()
+{
+
+}
+
 Piece* Point::GetPiece()
 {
 	return this->piece;
@@ -63,7 +68,7 @@ void Point::Reset()
 	this->Deselect();
 }
 
-bool Point::IsConnectedTo(Point* point)
+const bool Point::IsConnectedTo(Point* point) const
 {
 	for (auto connectedPoint : connectedPoints)
 	{
@@ -76,7 +81,7 @@ bool Point::IsConnectedTo(Point* point)
 	return false;
 }
 
-bool Point::HasFreeConnectedPoints()
+const bool Point::HasFreeConnectedPoints() const
 {
 	for (auto connectedPoint : connectedPoints)
 	{

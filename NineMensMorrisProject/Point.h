@@ -21,6 +21,7 @@ private:
 public:
 	// Constructor
 	Point(int id, sf::Vector2f position);
+	virtual ~Point();
 
 	// Accessors
 	Piece* GetPiece();
@@ -35,8 +36,8 @@ public:
 	void Deselect();
 	void ConnectPoint(Point* point);
 	void Reset();
-	bool IsConnectedTo(Point* point);
-	bool HasFreeConnectedPoints();
+	const bool IsConnectedTo(Point* point) const;
+	const bool HasFreeConnectedPoints() const;
 	void Update(sf::RenderWindow* window);
 };
 

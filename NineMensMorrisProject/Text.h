@@ -19,6 +19,7 @@ private:
 public:
 	// Constructor
 	Text(sf::Vector2f position, sf::String text);
+	virtual ~Text();
 
 	// Functions
 	void Init();
