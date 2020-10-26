@@ -24,6 +24,6 @@ public:
 	void ConnectPoint(Point* point);
 	void Disable();
 	const bool IsEnabled() const;
-	bool IsMillCompleted();
+	bool IsMillCompleted(int currentPlayerIndex);
 };
 

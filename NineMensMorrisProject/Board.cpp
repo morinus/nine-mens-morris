@@ -259,6 +259,7 @@ void Board::InitTexts()
 	this->playerTwoTitleText = new Text(sf::Vector2f(600.0f, 10.0f), "-Player 2-");
 
 	this->currentPlayerText = new Text(sf::Vector2f(480.0f, 250.0f), "CURRENT_PLAYER");
+
 	this->currentActionText = new Text(sf::Vector2f(480.0f, 300.0f), "CURRENT_ACTION");
 	this->currentActionText->SetColor(sf::Color::Blue);
 	this->currentActionText->SetCharacterSize(16);
@@ -382,15 +383,18 @@ Piece* Board::GetNextAvailablePiece(int currentPlayerIndex)
 	return nullptr;
 }
 
-bool Board::CheckIfLineIsCompletedForCurrentPlayer(int currentPlayerIndex)
+bool Board::CheckIfLineContainingPointIsCompletedForCurrentPlayer(Point* point, int currentPlayerIndex)
 {
 	for (auto line : lines)
 	{
-		if (line->IsMillCompleted())
+		for (auto connectedPoint : line->connectedPoints)
 		{
-			if (line->connectedPoints[0]->GetPiece()->GetOwnershipType() == currentPlayerIndex)
+			if (connectedPoint->GetId() == point->GetId())
 			{
-				return true;
+				if (line->IsMillCompleted(currentPlayerIndex))
+				{
+					return true;
+				}
 			}
 		}
 	}

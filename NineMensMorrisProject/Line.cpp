@@ -24,10 +24,8 @@ const bool Line::IsEnabled() const
 	return this->isEnabled;
 }
 
-bool Line::IsMillCompleted()
+bool Line::IsMillCompleted(int currentPlayerIndex)
 {
-	OwnershipType ownershipType = OwnershipType::PLAYERONE;
-
 	for (auto point : this->connectedPoints)
 	{
 		if (point->GetPiece() == nullptr)
@@ -36,11 +34,7 @@ bool Line::IsMillCompleted()
 		}
 
 		OwnershipType pieceOwnershipType = point->GetPiece()->GetOwnershipType();
-		if (ownershipType == OwnershipType::PLAYERONE)
-		{
-			ownershipType = pieceOwnershipType;
-		}
-		else if (ownershipType != pieceOwnershipType)
+		if (currentPlayerIndex != pieceOwnershipType)
 		{
 			return false;
 		}

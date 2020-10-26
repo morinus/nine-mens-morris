@@ -132,16 +132,18 @@ void Game::ProcessCurrentGameState()
 				piece->ConnectPoint(currentlySelectedPoint);
 
 				currentlySelectedPoint->PlacePiece(piece);
-				currentlySelectedPoint = nullptr;
 
-				this->board->DeselectEverything();
-
-				if (this->board->CheckIfLineIsCompletedForCurrentPlayer(this->currentPlayerIndex))
+				if (this->board->CheckIfLineContainingPointIsCompletedForCurrentPlayer(currentlySelectedPoint, this->currentPlayerIndex))
 				{
 					this->ChangeGameState(GameState::REMOVING);
+					this->board->DeselectEverything();
 
 					break;
 				}
+
+				currentlySelectedPoint = nullptr;
+
+				this->board->DeselectEverything();
 
 				this->ChangeTurn();
 
@@ -173,6 +175,7 @@ void Game::ProcessCurrentGameState()
 			pointPiece->Remove();
 			currentlySelectedPoint->Deselect();
 			this->board->DeselectEverything();
+			this->board->DisableAllLines();
 
 			if (this->board->CheckIfCurrentPlayerWon(this->currentPlayerIndex))
 			{
@@ -235,7 +238,7 @@ void Game::ProcessCurrentGameState()
 							this->board->GetCurrentlySelectedPiece()->Move(currentlySelectedPoint);
 							this->ChangeMovingStateSelection(MovingStateSelection::SELECTING_PIECE);
 
-							if (this->board->CheckIfLineIsCompletedForCurrentPlayer(this->currentPlayerIndex))
+							if (this->board->CheckIfLineContainingPointIsCompletedForCurrentPlayer(currentlySelectedPoint, this->currentPlayerIndex))
 							{
 								this->ChangeGameState(GameState::REMOVING);
 								break;

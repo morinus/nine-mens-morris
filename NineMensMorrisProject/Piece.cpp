@@ -77,6 +77,7 @@ void Piece::Reset()
 	this->isPressed = false;
 	this->SetPosition(this->originalPosition);
 	this->pieceState = PieceState::UNPLACED;
+	this->rect.setFillColor(sf::Color::White);
 }
 
 void Piece::Render(sf::RenderWindow* window, int deltaTime)
